@@ -10,9 +10,9 @@ module.exports = function() {
         throw ex;
     });
 
-    winston.add(winston.transports.File, { filename: 'logfile.log' });
-    winston.add(winston.transports.MongoDB, {
-        db: 'mongodb://localhost/online-reservation',
+    winston.add(new winston.transports.File({ filename: 'logFile.log '}));
+    winston.add(new winston.transports.MongoDB({
+        db: 'mongodb://127.0.0.1/online-reservation',
         level: 'info'
-    });
+    }));
 }
