@@ -1,10 +1,8 @@
-const config = require('config');
-const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const {date, number} = require("joi");
 
-const airPlaneTicketSchema = new mongoose.Schema({
+const airplaneTicketSchema = new mongoose.Schema({
     origin: {
         type: String,
         required: true,
@@ -45,8 +43,8 @@ const airPlaneTicketSchema = new mongoose.Schema({
     }
 });
 
-const AirPlaneTicket = mongoose.model('User', airPlaneTicketSchema);
-function validateAirPlaneTicket(user) {
+const AirplaneTicket = mongoose.model('User', airplaneTicketSchema);
+function validateAirplaneTicket(user) {
     const schema = Joi.object({
         origin: Joi.string().min(2).max(50).required(),
         destination: Joi.string().min(2).max(50).required().email(),
@@ -59,5 +57,5 @@ function validateAirPlaneTicket(user) {
     return schema.validate(user);
 }
 
-exports.User = AirPlaneTicket;
-exports.validate = validateAirPlaneTicket;
+exports.AirplaneTicket = AirplaneTicket;
+exports.validate = validateAirplaneTicket;
