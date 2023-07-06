@@ -1,10 +1,11 @@
 const express = require('express');
+const users = require('../routes/users')
 // other routes
 const error = require('../middleware/error');
 
 module.exports = function(app) {
     app.use(express.json());
-    // load other routes
+    app.use('/api/users', users);
     app.use(error);
 };
 

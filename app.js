@@ -6,7 +6,7 @@ require('./startup/logging');
 const {error} = require("winston");
 require('./startup/routes')(app);
 require('./startup/db')();
-// require('./startup/config')();
+require('./startup/config')();
 require('./startup/validation')();
 
 const port = process.env.PORT || 3000;
