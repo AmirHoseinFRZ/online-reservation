@@ -6,4 +6,6 @@ const auth = require('../middleware/auth');
 router.get('/', auth, async(req, res) => {
     const tickets = await AirplaneTicket.find();
     res.send(tickets);
-})
+});
+
+module.exports = router;

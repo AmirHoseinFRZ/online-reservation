@@ -7,7 +7,7 @@ const error = require('../middleware/error');
 module.exports = function(app) {
     app.use(express.json());
     app.use('/api/users', users);
-    app.use('api/airplane-tickets', airplaneTickets)
+    app.use('/api/airplane-tickets', airplaneTickets)
     app.use(error);
 };
 

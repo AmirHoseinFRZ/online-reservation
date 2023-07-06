@@ -43,7 +43,7 @@ const airplaneTicketSchema = new mongoose.Schema({
     }
 });
 
-const AirplaneTicket = mongoose.model('User', airplaneTicketSchema);
+const AirplaneTicket = mongoose.model('AirplaneTicket', airplaneTicketSchema);
 function validateAirplaneTicket(user) {
     const schema = Joi.object({
         origin: Joi.string().min(2).max(50).required(),
