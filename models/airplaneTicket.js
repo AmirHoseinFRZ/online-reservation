@@ -22,11 +22,11 @@ const airplaneTicketSchema = new mongoose.Schema({
         maxlength: 50
     },
     departureTime: {
-        type: Date,
+        type: Date, // it will change
         required: true
     },
     arrivalTime:{
-        type: Date,
+        type: Date, //it will change
         required: true
     },
     flightNumber:{
@@ -40,6 +40,16 @@ const airplaneTicketSchema = new mongoose.Schema({
         required: true,
         minlength: 2,
         maxlength: 50
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: 10,
+        max: 500
+    },
+    isVip: {
+        type: Boolean,
+        default: false
     }
 });
 
