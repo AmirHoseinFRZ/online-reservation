@@ -22,11 +22,11 @@ const airplaneTicketSchema = new mongoose.Schema({
         maxlength: 50
     },
     departureTime: {
-        type: Date, // it will change
+        type: String, // it will change
         required: true
     },
     arrivalTime:{
-        type: Date, //it will change
+        type: String, //it will change
         required: true
     },
     flightNumber:{
@@ -61,11 +61,11 @@ const AirplaneTicket = mongoose.model('AirplaneTicket', airplaneTicketSchema);
 function validateAirplaneTicket(user) {
     const schema = Joi.object({
         origin: Joi.string().min(2).max(50).required(),
-        destination: Joi.string().min(2).max(50).required().email(),
+        destination: Joi.string().min(2).max(50).required(),
         airLine: Joi.string().min(2).max(50).required(),
-        departureTime: date().required(),
-        arrivalTime: date().required(),
-        flightNumber: number().min(0).max(1000).required(),
+        departureTime: Joi.string().required(),
+        arrivalTime: Joi.string().required(),
+        flightNumber: Joi.number().min(0).max(1000).required(),
         terminal: Joi.string().min(2).max(50).required(),
         price: Joi.number().min(10).max(500).required(),
         quantity: Joi.number().min(1),
