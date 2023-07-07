@@ -75,3 +75,4 @@ function validateAirplaneTicket(user) {
 
 exports.AirplaneTicket = AirplaneTicket;
 exports.validate = validateAirplaneTicket;
+exports.airplaneTicketSchema = airplaneTicketSchema;
