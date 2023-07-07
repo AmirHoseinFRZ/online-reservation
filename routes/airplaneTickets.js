@@ -37,7 +37,7 @@ router.post('/', [auth, isAdmin], async(req , res) => {
     res.send(ticket);
 })
 
-router.delete('/:id', [isAdmin, auth], async(req , res) => {
+router.delete('/:id', [auth, isAdmin], async(req , res) => {
     const ticket = await AirplaneTicket.findByIdAndRemove(req.params.id);
 
     if (!ticket) return res.status(404).send('The ticket with the given ID was not found.');

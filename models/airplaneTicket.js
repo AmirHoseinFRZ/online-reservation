@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const {date, number} = require("joi");
 
 const airplaneTicketSchema = new mongoose.Schema({
     origin: {
