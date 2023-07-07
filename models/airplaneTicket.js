@@ -73,6 +73,6 @@ function validateAirplaneTicket(user) {
     return schema.validate(user);
 }
 
-exports.AirplaneTicket = AirplaneTicket;
-exports.validate = validateAirplaneTicket;
-exports.airplaneTicketSchema = airplaneTicketSchema;
+module.exports.AirplaneTicket = AirplaneTicket;
+module.exports.validate = validateAirplaneTicket;
+module.exports.airplaneTicketSchema = airplaneTicketSchema;
