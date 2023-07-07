@@ -47,12 +47,16 @@ const airplaneTicketSchema = new mongoose.Schema({
         min: 10,
         max: 500
     },
+    quantity: {
+        type: Number,
+        default: 50,
+        min: 1
+    },
     isVip: {
         type: Boolean,
         default: false
     }
 });
-
 const AirplaneTicket = mongoose.model('AirplaneTicket', airplaneTicketSchema);
 function validateAirplaneTicket(user) {
     const schema = Joi.object({
@@ -62,7 +66,10 @@ function validateAirplaneTicket(user) {
         departureTime: date().required(),
         arrivalTime: date().required(),
         flightNumber: number().min(0).max(1000).required(),
-        terminal: Joi.string().min(2).max(50).required()
+        terminal: Joi.string().min(2).max(50).required(),
+        price: Joi.number().min(10).max(500).required(),
+        quantity: Joi.number().min(1),
+        isVip: Joi.boolean()
     });
     return schema.validate(user);
 }
