@@ -40,6 +40,12 @@ const trainTicketSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 50
     },
+    carriageNumber: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 100
+    },
     price: {
         type: Number,
         required: true,
@@ -48,8 +54,9 @@ const trainTicketSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number,
+        required: true,
         default: 50,
-        min: 1
+        min: 0
     },
     isVip: {
         type: Boolean,
@@ -67,13 +74,14 @@ function validateTrainTicket(user) {
         arrivalTime: Joi.string().required(),
         trainNumber: Joi.number().min(0).max(1000).required(),
         station: Joi.string().min(2).max(50).required(),
+        carriageNumber: Joi.number().min(1).max(100).required(),
         price: Joi.number().min(10).max(500).required(),
-        quantity: Joi.number().min(1),
+        quantity: Joi.number().min(1).required(),
         isVip: Joi.boolean()
     });
     return schema.validate(user);
 }
 
-exports.TrainTicket = TrainTicket;
-exports.validate = validateTrainTicket;
-exports.trainTicketSchema = trainTicketSchema;
+module.exports.TrainTicket = TrainTicket;
+module.exports.validate = validateTrainTicket;
+module.exports.trainTicketSchema = trainTicketSchema;
