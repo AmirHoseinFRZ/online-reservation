@@ -76,3 +76,4 @@ function validateTrainTicket(user) {
 
 exports.TrainTicket = TrainTicket;
 exports.validate = validateTrainTicket;
+exports.trainTicketSchema = trainTicketSchema;

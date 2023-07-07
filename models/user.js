@@ -1,4 +1,5 @@
 const airplaneTicketSchema = require('../models/airplaneTicket').airplaneTicketSchema;
+const trainTicketSchema = require('../models/trainTicket').trainTicketSchema;
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -26,6 +27,7 @@ const userSchema = new mongoose.Schema({
         maxlength: 1024
     },
     airplaneTickets: [airplaneTicketSchema],
+    trainTickets: [trainTicketSchema],
     isVip: {
         type: Boolean,
         default: false
@@ -47,7 +49,8 @@ function validateUser(user) {
         name: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(255).required(),
-        airplaneTickets : Joi.ObjectId(),
+        airplaneTickets: Joi.ObjectId(),
+        trainTickets: Joi.ObjectId(),
         isVip: Joi.boolean(),
         isAdmin: Joi.boolean()
     });
