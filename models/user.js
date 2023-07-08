@@ -51,10 +51,11 @@ function validateUser(user) {
         name: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(255).required(),
-        airplaneTickets: Joi.ObjectId(),
-        trainTickets: Joi.ObjectId(),
-        isVip: Joi.boolean(),
-        isAdmin: Joi.boolean()
+        airplaneTickets: Joi.forbidden(),
+        trainTickets: Joi.forbidden(),
+        reservedRooms: Joi.forbidden(),
+        isVip: Joi.forbidden(),
+        isAdmin: Joi.forbidden()
     });
     return schema.validate(user);
 }

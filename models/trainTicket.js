@@ -54,15 +54,23 @@ const trainTicketSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number,
-        required: true,
-        default: 50,
-        min: 0
+        // required: true,
+        // default: 50,
+        min: 0,
     },
     isVip: {
         type: Boolean,
         default: false
     }
 });
+
+trainTicketSchema.post('save', function(doc, next) {
+    if (doc.min < 1) {
+        doc.remove();
+    }
+    next();
+});
+
 const TrainTicket = mongoose.model('TrainTicket', trainTicketSchema);
 
 function validateTrainTicket(ticket) {
@@ -76,7 +84,7 @@ function validateTrainTicket(ticket) {
         station: Joi.string().min(2).max(50).required(),
         carriageNumber: Joi.number().min(1).max(100).required(),
         price: Joi.number().min(10).max(500).required(),
-        quantity: Joi.number().min(1).required(),
+        quantity: Joi.number().min(1).max(50).required(),
         isVip: Joi.boolean()
     });
     return schema.validate(ticket);

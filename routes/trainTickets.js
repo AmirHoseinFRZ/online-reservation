@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
-const {TrainTicket, validate} = require('../models/airplaneTicket');
+const {TrainTicket, validate} = require('../models/trainTicket');
 const isAdmin = require('../middleware/admin');
 const isVip = require('../middleware/vip');
 const auth = require('../middleware/auth');
 
-router.get('/find:id', async(req, res) => {
+router.get('/find:id', auth,async(req, res) => {
     const ticket = await TrainTicket.findById(req.params.id);
     if (!ticket) return res.status(404).send('The ticket with the given ID was not found.');
 
@@ -20,7 +20,7 @@ router.get('/including-vips', [auth, isVip], async(req, res) => {
     res.send(tickets);
 });
 
-router.get('/without-vips', async(req, res) => {
+router.get('/without-vips', auth,async(req, res) => {
     const tickets = await TrainTicket
         .find({isVip: false})
         .sort('price');
