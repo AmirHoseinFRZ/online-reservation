@@ -1,5 +1,6 @@
 const airplaneTicketSchema = require('../models/airplaneTicket').airplaneTicketSchema;
 const trainTicketSchema = require('../models/trainTicket').trainTicketSchema;
+const hotelRoomSchema = require('../models/hotelRoom').hotelRoomSchema
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -28,6 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     airplaneTickets: [airplaneTicketSchema],
     trainTickets: [trainTicketSchema],
+    reservedRooms: [hotelRoomSchema],
     isVip: {
         type: Boolean,
         default: false
