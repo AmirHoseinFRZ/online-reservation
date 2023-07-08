@@ -37,6 +37,29 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    ID: {
+        type: Number,
+        min: 0
+    },
+    lastName: {
+        type: String,
+        minlength: 5,
+        maxlength: 50
+    },
+    phone: {
+        type: String,
+        length: 11,
+        pattern: /^[0-9]+$/
+    },
+    sex: {
+        type: String,
+        enum: ['male', 'female']
+    },
+    age: {
+        type: Number,
+        min: 8,
+        max: 100
     }
 });
 
@@ -55,10 +78,45 @@ function validateUser(user) {
         trainTickets: Joi.forbidden(),
         reservedRooms: Joi.forbidden(),
         isVip: Joi.forbidden(),
-        isAdmin: Joi.forbidden()
+        isAdmin: Joi.forbidden(),
+        ID: Joi.number().min(0),
+        lastName: Joi.string().min(5).max(50),
+        phone: Joi.string().min(11).max(11).pattern(/^[0-9]+$/),
+        age: Joi.number().min(8).max(100),
+        sex: Joi.string().valid('male', 'female')
     });
     return schema.validate(user);
 }
 
-exports.User = User;
-exports.validate = validateUser;
+function profileValidate(user) {
+    const schema = Joi.object({
+        name: Joi.string().min(5).max(50).required(),
+        ID: Joi.number().min(0),
+        lastName: Joi.string().min(5).max(50),
+        phone: Joi.string().min(11).max(11).pattern(/^[0-9]+$/),
+        age: Joi.number().min(8).max(100),
+        sex: Joi.string().valid('male', 'female')
+    });
+    return schema.validate(user);
+}
+
+function passwordValidate(user) {
+    const schema = Joi.object({
+        password: Joi.string().min(5).max(255).required(),
+    });
+    return schema.validate(user);
+}
+
+function signInValidate(user){
+    const schema = Joi.object({
+        email: Joi.string().min(5).max(255).required().email(),
+        password: Joi.string().min(5).max(255).required()
+    });
+    return schema.validate(user);
+}
+
+module.exports.User = User;
+module.exports.validate = validateUser;
+module.exports.profileValidate = profileValidate;
+module.exports.passwordValidate = passwordValidate;
+module.exports.signInValidate = signInValidate;

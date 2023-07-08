@@ -1,5 +1,5 @@
 const auth = require('../middleware/auth');
-const {User, validate} = require('../models/user');
+const {User, validate, signInValidate} = require('../models/user');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const _ = require('lodash');
@@ -50,11 +50,4 @@ router.post('/sign-in', limiter, async (req, res) => {
     res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 })
 
-function signInValidate(user){
-    const schema = Joi.object({
-        email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(255).required()
-    });
-    return schema.validate(user);
-}
 module.exports = router;
