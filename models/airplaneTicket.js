@@ -57,7 +57,7 @@ const airplaneTicketSchema = new mongoose.Schema({
     }
 });
 const AirplaneTicket = mongoose.model('AirplaneTicket', airplaneTicketSchema);
-function validateAirplaneTicket(user) {
+function validateAirplaneTicket(ticket) {
     const schema = Joi.object({
         origin: Joi.string().min(2).max(50).required(),
         destination: Joi.string().min(2).max(50).required(),
@@ -70,7 +70,7 @@ function validateAirplaneTicket(user) {
         quantity: Joi.number().min(1),
         isVip: Joi.boolean()
     });
-    return schema.validate(user);
+    return schema.validate(ticket);
 }
 
 module.exports.AirplaneTicket = AirplaneTicket;
