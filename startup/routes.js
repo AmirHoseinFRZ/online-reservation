@@ -2,8 +2,9 @@ const express = require('express');
 const users = require('../routes/users');
 const airplaneTickets = require('../routes/airplaneTickets');
 const trainTickets = require('../routes/trainTickets');
-const buyAirplaneTicket = require('../routes/buyAirpaneTicket');
-const buyTrainTicket = require('../routes/buyTrainTicket');
+const buyAirplaneTickets = require('../routes/buyAirpaneTickets');
+const buyTrainTickets = require('../routes/buyTrainTickets');
+const hotelRooms = require('../routes/hotelRooms');
 // other routes
 const error = require('../middleware/error');
 
@@ -12,8 +13,9 @@ module.exports = function(app) {
     app.use('/api/users', users);
     app.use('/api/airplane-tickets', airplaneTickets);
     app.use('/api/train-tickets', trainTickets);
-    app.use('/api/buy-airplane-ticket', buyAirplaneTicket);
-    app.use('/api/buy-train-ticket', buyTrainTicket);
+    app.use('/api/buy-airplane-ticket', buyAirplaneTickets);
+    app.use('/api/buy-train-ticket', buyTrainTickets);
+    app.use('/api/hotel-rooms', hotelRooms);
     // other routers
     app.use(error);
 };
