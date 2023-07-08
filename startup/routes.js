@@ -8,9 +8,11 @@ const hotelRooms = require('../routes/hotelRooms');
 const reserveHotelRooms = require('../routes/reserveHotelRooms');
 // other routes
 const error = require('../middleware/error');
+const limiter = require('../middleware/limitter');
 
 module.exports = function(app) {
     app.use(express.json());
+    app.use(limiter);
     app.use('/api/users', users);
     app.use('/api/airplane-tickets', airplaneTickets);
     app.use('/api/train-tickets', trainTickets);
