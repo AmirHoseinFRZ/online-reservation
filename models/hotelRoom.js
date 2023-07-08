@@ -5,7 +5,7 @@ const hotelRoomSchema = new mongoose.Schema({
     hotelName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 2,
         maxlength: 50
     },
     roomNumber: {
@@ -50,7 +50,7 @@ const HotelRoom = mongoose.model('HotelRoom', hotelRoomSchema);
 
 function validateHotelRoom(hotel){
     const schema = Joi.object({
-        hotelName: Joi.string().min(5).max(50).required(),
+        hotelName: Joi.string().min(2).max(50).required(),
         roomNumber: Joi.number().min(1).max(500).required(),
         city: Joi.string().min(2).max(50).required(),
         capacity: Joi.number().min(1).max(10).required(),
@@ -63,5 +63,5 @@ function validateHotelRoom(hotel){
 }
 
 module.exports.HotelRoom = HotelRoom;
-module.exports.validation = validateHotelRoom;
+module.exports.validate = validateHotelRoom;
 module.exports.hotelRoomSchema = hotelRoomSchema;
