@@ -5,7 +5,7 @@ const {AirplaneTicket} = require('../models/trainTicket');
 const Fawn = require('fawn');
 const router = express.Router();
 
-router.post('/:userId:ticketId', auth, async(req, res) => {
+router.post('/:userId/:ticketId', auth, async(req, res) => {
     let user = await User.findOne({ _id: req.params.userId });
     if (!user) return res.status(400).send('Invalid user.');
 
