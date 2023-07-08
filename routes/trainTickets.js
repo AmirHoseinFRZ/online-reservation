@@ -6,6 +6,18 @@ const isAdmin = require('../middleware/admin');
 const isVip = require('../middleware/vip');
 const auth = require('../middleware/auth');
 
+router.get('/search', auth,async(req, res) => {
+    const tickets = await TrainTicket
+        .find({arrivalTime: req.body.arrivalTime,
+            departureTime: req.body.departureTime,
+            destination: req.body.destination,
+            origin: req.body.origin,
+            quantity: { $gte: req.body.passengers}}) // default of passenger is one when user didn't choose it
+    if (!tickets) return res.status(404).send('The ticket with the given ID was not found.');
+
+    res.send(tickets);
+});
+
 router.get('/find:id', auth,async(req, res) => {
     const ticket = await TrainTicket.findById(req.params.id);
     if (!ticket) return res.status(404).send('The ticket with the given ID was not found.');

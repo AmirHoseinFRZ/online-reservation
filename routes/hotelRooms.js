@@ -6,6 +6,17 @@ const isAdmin = require('../middleware/admin');
 const isVip = require('../middleware/vip');
 const auth = require('../middleware/auth');
 
+
+router.get('/search', auth,async(req, res) => {
+    const tickets = await HotelRoom
+        .find({entryDate: req.body.arrivalTime,
+            departureDate: req.body.departureTime,
+            city: req.body.city,
+            capacity: { $gte: req.body.passengers}}) // default of passenger is 1 when user didn't choose it
+    if (!tickets) return res.status(404).send('The ticket with the given ID was not found.');
+
+    res.send(tickets);
+});
 router.get('/find:id', async(req, res) => {
     const room = await HotelRoom.findById(req.params.id);
     if (!room) return res.status(404).send('The room with the given ID was not found.');
