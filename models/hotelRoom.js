@@ -64,4 +64,4 @@ function validateHotelRoom(hotel){
 
 module.exports.HotelRoom = HotelRoom;
 module.exports.validation = validateHotelRoom;
-module.exports.hotelSchema = hotelRoomSchema;
+module.exports.hotelRoomSchema = hotelRoomSchema;
